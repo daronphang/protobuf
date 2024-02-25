@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+import "google/protobuf/struct.proto";
+
+// All shared interfaces are defined in this proto
+// Reserved fields for all requests are from 1-10
+
+message UserInfo {
+    string username = 1;
+    string fab = 2;
+}
+
+// Heartbeat service
+
+message HeartBeatRequest {
+    string correlationId = 1;
+}
+
+message HeartBeatResponse {
+    string message = 1;
+}
+
+// Query service
+
+message QueryRequest {
+    string correlationId = 1;
+    string query = 11;
+    UserInfo userinfo = 12;
+    google.protobuf.Any payload = 13;
+}
+
+message QueryResponse {
+    repeated google.protobuf.Struct results = 1;
+}
+
+// Task service
+
+message TaskRequest {
+    string correlationId = 1;
+    string task = 11;
+    UserInfo userinfo = 12;
+    google.protobuf.Any payload = 13;
+}
+
+message TaskResponse {
+    string taskId = 1;
+}
+
+// Task status 
+
+// task status
+
+message TaskStatusRequest {
+    string correlationId = 1;
+    string taskId = 11;
+    string task = 12;
+}
+
+message TaskStatusResponse {
+    string state = 1;
+    string result = 2;
+    string error = 3;
+}
