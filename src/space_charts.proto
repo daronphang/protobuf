@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+import "google/protobuf/struct.proto";
+
+import "shared.proto";
+
+
+service SpaceCharts {
+    rpc heartbeat(HeartBeatRequest) returns (HeartBeatResponse) {}
+    rpc query(QueryRequest) returns (QueryResponse) {}
+    rpc task(TaskRequest) returns (TaskResponse) {}
+    rpc taskStatus(TaskStatusRequest) returns (TaskStatusResponse) {}
+}
+
+
+message Common {
+    // reserve 10 fields
+    string module = 1; 
+}
+
+message QuerySpaceSamples {
+    int32 chId = 1;
+    int32 ckcId = 2;
+    int32 samples = 3;
+    int32 lookbackDays = 4;
+    string startDate = 5;
+    string endDate = 6;
+}
+
+message QuerySpaceChartMetadata {
+    int32 chId = 1;
+    int32 ckcId = 2;
+}
+
+message CriticalChartsMonitoringTask {
+    string module = 1; 
+    repeated string designIds = 11;
+}
+
+message ChronicChartsMonitoringTask {
+    string module = 1; 
+}
+
+message FixedChartsMonitoringTask {
+    string module = 1; 
+}
