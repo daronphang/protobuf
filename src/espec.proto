@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+import "google/protobuf/struct.proto";
+
+import "shared.proto";
+
+
+service ESPEC {
+    rpc heartbeat(HeartBeatRequest) returns (HeartBeatResponse) {}
+    rpc task(TaskRequest) returns (TaskResponse) {}
+    rpc taskStatus(TaskStatusRequest) returns (TaskStatusResponse) {}
+}
+
+
+message ESPECMonitoringTask {
+    int32 lookbackWeeks = 1;
+    repeated string designIds = 2;
+}
