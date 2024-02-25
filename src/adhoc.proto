@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+import "google/protobuf/struct.proto";
+
+import "shared.proto";
+
+service Adhoc {
+    rpc heartbeat(HeartBeatRequest) returns (HeartBeatResponse) {}
+    rpc query(QueryRequest) returns (QueryResponse) {}
+    rpc task(TaskRequest) returns (TaskResponse) {}
+    rpc taskStatus(TaskStatusRequest) returns (TaskStatusResponse) {}
+}
+
+// query service
+
+message QueryDiffusionTools {}
+
+message QueryFDCViolations {
+    repeated string tools = 1;
+    int32 lookbackDays = 2;
+    string fab = 3;
+}
+
+message QueryDPNLoadLocks {
+    repeated string equipIds = 1;
+    string startDate = 2;
+    string endDate = 3;
+    repeated string loadlockEntrance = 4;
+    repeated string loadlockExit = 5;
+}
+
+message QuerySPCViolations {
+    repeated string lotIds = 1;
+    repeated string measSteps = 2;
+}
+
+// tasks service
+
+message FDCViolationsTask {
+    int32 lookbackDays = 1;
+}
+
+message DPNLoadLocksTask {
+    repeated string equipIds = 1;
+    string startDate = 2;
+    string endDate = 3;
+    repeated string loadlockEntrance = 4;
+    repeated string loadlockExit = 5;
+}
+
+message SPCOOCTask {
+}
+
+message DPNMonitoringTask {
+}
+
+message BlockedEtchMonitoringTask {
+}
